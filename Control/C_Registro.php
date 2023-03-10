@@ -16,7 +16,7 @@ class C_Registro{
             $obj = new Registro();
             $obj->setear(
                 $param['id'],
-                $param['dniPersona'],
+                $param['idPersona'],
                 $param['idCurso']
             );
         }
@@ -24,7 +24,7 @@ class C_Registro{
     }
 
      /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los dniPersonas de 
+     * Espera como parametro un arreglo asociativo donde las claves coinciden con los idPersonas de 
      * las variables instancias del objeto que son claves
      * @param array $param
      * @return Registro
@@ -114,8 +114,8 @@ class C_Registro{
             $where .= '';
             if (isset($param['id']))
                 $where .= " and id ='" . $param['id'] . "'";
-            if (isset($param['dniPersona']))
-                $where .= " and dniPersona ='" . $param['dniPersona'] . "'";
+            if (isset($param['idPersona']))
+                $where .= " and idPersona ='" . $param['idPersona'] . "'";
             if (isset($param['idCurso']))
                 $where .= " and idCurso ='" . $param['idCurso'] . "'";
             

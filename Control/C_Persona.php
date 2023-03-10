@@ -132,6 +132,7 @@ class C_Persona
                 $where .= " and genero ='" . $param['genero'] . "'";
             if (isset($param['edad']))
                 $where .= " and edad ='" . $param['edad'] . "'";
+            
         }
         $obj = new Persona();
         $arreglo =  $obj->listar($where);

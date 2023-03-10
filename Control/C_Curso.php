@@ -19,7 +19,6 @@ class C_Curso
                 $param['id'],
                 $param['nombre'],
                 $param['legajo'],
-
                 $param['descripcion'],
                 $param['modalidad']
             );

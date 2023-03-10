@@ -4,7 +4,7 @@ class Registro
 {
 
     private $id;
-    private $dniPersona;
+    private $idPersona;
     private $idCurso;
     private $mensajeOperacion;
 
@@ -12,14 +12,14 @@ class Registro
     public function __construct()
     {
         $this->id = "";
-        $this->dniPersona = "";
+        $this->idPersona = "";
         $this->idCurso = "";
     }
 
-    public function setear($id, $dniPersona, $idCurso)
+    public function setear($id, $idPersona, $idCurso)
     {
         $this->id = $id;
-        $this->dniPersona = $dniPersona;
+        $this->idPersona = $idPersona;
         $this->idCurso = $idCurso;
     }
 
@@ -35,14 +35,14 @@ class Registro
         $this->id = $id;
     }
 
-    public function getDniPersona()
+    public function getidPersona()
     {
-        return $this->dniPersona;
+        return $this->idPersona;
     }
 
-    public function setDniPersona($dniPersona)
+    public function setidPersona($idPersona)
     {
-        $this->dniPersona = $dniPersona;
+        $this->idPersona = $idPersona;
     }
 
     public function getIdCurso()
@@ -77,7 +77,7 @@ class Registro
             if ($base->Ejecutar($sql)) {
                 if ($row2 = $base->Registro()) {
                     $this->setId($row2['id']);
-                    $this->setDniPersona($row2['dniPersona']);
+                    $this->setidPersona($row2['idPersona']);
                     $this->setIdCurso($row2['idCurso']);
                     $resp = true;
                 }
@@ -101,7 +101,7 @@ class Registro
             if ($res > -1) {
                 if ($res > 0) {
                     $row = $base->Registro();
-                    $this->setear($row['id'], $row['dniPersona'], $row['idCurso']);
+                    $this->setear($row['id'], $row['idPersona'], $row['idCurso']);
                 }
             }
         } else {
@@ -115,7 +115,7 @@ class Registro
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO registros(id,dniPersona,idCurso) VALUES('" . $this->getId() . "','" . $this->getDniPersona() . "','" . $this->getIdCurso() ."');";
+        $sql = "INSERT INTO registros(id,idPersona,idCurso) VALUES('" . $this->getId() . "','" . $this->getidPersona() . "','" . $this->getIdCurso() ."');";
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
                 $this->setId($elid);
@@ -135,7 +135,7 @@ class Registro
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "UPDATE registros SET dniPersona='" . $this->getDniPersona() . "',
+        $sql = "UPDATE registros SET idPersona='" . $this->getidPersona() . "',
         idCurso='" . $this->getIdCurso() . "',
         WHERE id=" . $this->getId();
         if ($base->Iniciar()) {
@@ -182,7 +182,7 @@ class Registro
             if ($res > 0) {
                 while ($row = $base->Registro()) {
                     $obj = new Registro();
-                    $obj->setear($row['id'], $row['dniPersona'], $row['idCurso']);
+                    $obj->setear($row['id'], $row['idPersona'], $row['idCurso']);
                     array_push($arreglo, $obj);
                 }
             }
