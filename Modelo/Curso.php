@@ -5,6 +5,7 @@ class Curso
 
     private $id;
     private $nombre;
+    private $legajo;
     private $descripcion;
     private $modalidad;
     private $mensajeOperacion;
@@ -14,14 +15,16 @@ class Curso
     {
         $this->id = "";
         $this->nombre = "";
+        $this->legajo = "";
         $this->descripcion = "";
         $this->modalidad = "";
     }
 
-    public function setear($id, $nombre, $descripcion, $modalidad)
+    public function setear($id, $nombre, $legajo, $descripcion, $modalidad)
     {
         $this->id = $id;
         $this->nombre = $nombre;
+        $this->legajo = $legajo;
         $this->descripcion = $descripcion;
         $this->modalidad = $modalidad;
     }
@@ -46,6 +49,17 @@ class Curso
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
+    }
+    public function getLegajo()
+    {
+        return $this->legajo;
+    }
+
+    public function setLegajo($legajo)
+    {
+        $this->legajo = $legajo;
+
+        return $this;
     }
 
     public function getDescripcion()
@@ -91,6 +105,7 @@ class Curso
                 if ($row2 = $base->Registro()) {
                     $this->setId($row2['id']);
                     $this->setNombre($row2['nombre']);
+                    $this->setLegajo($row2['legajo']);
                     $this->setDescripcion($row2['descripcion']);
                     $this->setModalidad($row2['modalidad']);
                     $resp = true;
@@ -115,7 +130,7 @@ class Curso
             if ($res > -1) {
                 if ($res > 0) {
                     $row = $base->Registro();
-                    $this->setear($row['id'], $row['nombre'], $row['descripcion'], $row['modalidad']);
+                    $this->setear($row['id'], $row['nombre'], $row['legajo'], $row['descripcion'], $row['modalidad']);
                 }
             }
         } else {
@@ -129,7 +144,7 @@ class Curso
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO cursos(id,nombre,descripcion,modalidad) VALUES('" . $this->getId() . "','" . $this->getNombre() . "','" . $this->getDescripcion() . "','" . $this->getModalidad() . "');";
+        $sql = "INSERT INTO cursos(id,nombre, legajo, descripcion,modalidad) VALUES('" . $this->getId() . "','" . $this->getNombre() . "','". $this->getLegajo(). "','" . $this->getDescripcion() . "','" . $this->getModalidad() . "');";
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
                 $this->setId($elid);
@@ -150,6 +165,7 @@ class Curso
         $resp = false;
         $base = new BaseDatos();
         $sql = "UPDATE cursos SET nombre='" . $this->getNombre() . "',
+        legajo='" . $this->getLegajo() . "',
         descripcion='" . $this->getDescripcion() . "',
         modalidad='" . $this->getModalidad() . "',
         WHERE id=" . $this->getId();
@@ -197,11 +213,13 @@ class Curso
             if ($res > 0) {
                 while ($row = $base->Registro()) {
                     $obj = new Curso();
-                    $obj->setear($row['id'], $row['nombre'], $row['descripcion'], $row['modalidad']);
+                    $obj->setear($row['id'], $row['nombre'], $row['legajo'], $row['descripcion'], $row['modalidad']);
                     array_push($arreglo, $obj);
                 }
             }
         }
         return $arreglo;
     }
+
+  
 }

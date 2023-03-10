@@ -1,7 +1,8 @@
 
 <?php
 
-class C_Curso{
+class C_Curso
+{
 
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
@@ -17,6 +18,8 @@ class C_Curso{
             $obj->setear(
                 $param['id'],
                 $param['nombre'],
+                $param['legajo'],
+
                 $param['descripcion'],
                 $param['modalidad']
             );
@@ -24,7 +27,7 @@ class C_Curso{
         return $obj;
     }
 
-     /**
+    /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
      * las variables instancias del objeto que son claves
      * @param array $param
@@ -35,7 +38,7 @@ class C_Curso{
         $obj = null;
         if (isset($param['id'])) {
             $obj = new Curso();
-            $obj->cargar($param['id'], null, null, null);
+            $obj->cargar($param['id'], null, null, null, null);
         }
         return $obj;
     }
@@ -46,15 +49,15 @@ class C_Curso{
      * @return boolean
      */
 
-     private function seteadosCamposClaves($param)
-     {
-         $resp = false;
-         if (isset($param['id']))
-             $resp = true;
-         return $resp;
-     }
+    private function seteadosCamposClaves($param)
+    {
+        $resp = false;
+        if (isset($param['id']))
+            $resp = true;
+        return $resp;
+    }
 
-      /**
+    /**
      * Inserta un objeto
      * @param array $param
      */
@@ -62,9 +65,16 @@ class C_Curso{
     {
         $resp = false;
         $param['id'] = null;
-        $obj = $this->cargarObjeto($param);
-        if ($obj != null and $obj->insertar()) {
-            $resp = true;
+
+        //Se verifica que no se repita el legajo
+        $curso = ["legajo" => $param['legajo']];
+        $existe = $this->buscar($curso);
+
+        if ($existe == null) {
+            $obj = $this->cargarObjeto($param);
+            if ($obj != null and $obj->insertar()) {
+                $resp = true;
+            }
         }
         return $resp;
     }
@@ -86,7 +96,7 @@ class C_Curso{
         return $resp;
     }
 
-     /**
+    /**
      * permite modificar un objeto
      * @param array $param
      * @return boolean
@@ -117,16 +127,16 @@ class C_Curso{
                 $where .= " and id ='" . $param['id'] . "'";
             if (isset($param['nombre']))
                 $where .= " and nombre ='" . $param['nombre'] . "'";
+            if (isset($param['legajo']))
+                $where .= " and legajo ='" . $param['legajo'] . "'";
             if (isset($param['descripcion']))
                 $where .= " and descripcion ='" . $param['descripcion'] . "'";
             if (isset($param['modalidad']))
                 $where .= " and modalidad ='" . $param['modalidad'] . "'";
-            
         }
         $obj = new Curso();
         $arreglo =  $obj->listar($where);
 
         return $arreglo;
     }
-
 }

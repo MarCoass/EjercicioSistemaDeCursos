@@ -26,7 +26,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-dark">
             <li><a class="dropdown-item" href="RegistrarPersona.php">Registrar persona</a></li>
-            <li><a class="dropdown-item" href="#">Registrar curso</a></li>
+            <li><a class="dropdown-item" href="RegistrarCurso.php">Registrar curso</a></li>
             <li><a class="dropdown-item" href="ListadoPersonas.php">Listar personas</a></li>
             <li><a class="dropdown-item" href="#">Listar cursos</a></li>
           </ul>
