@@ -1,6 +1,7 @@
 <?php
 
-class C_Persona{
+class C_Persona
+{
 
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
@@ -14,6 +15,7 @@ class C_Persona{
 
             $obj = new Persona();
             $obj->setear(
+                '',
                 $param['dni'],
                 $param['razonSocial'],
                 $param['genero'],
@@ -23,7 +25,7 @@ class C_Persona{
         return $obj;
     }
 
-     /**
+    /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
      * las variables instancias del objeto que son claves
      * @param array $param
@@ -32,9 +34,9 @@ class C_Persona{
     private function cargarObjetoConClave($param)
     {
         $obj = null;
-        if (isset($param['dni'])) {
+        if (isset($param['id'])) {
             $obj = new Persona();
-            $obj->cargar($param['dni'], null, null, null);
+            $obj->cargar($param['id'], null, null, null, null);
         }
         return $obj;
     }
@@ -45,26 +47,34 @@ class C_Persona{
      * @return boolean
      */
 
-     private function seteadosCamposClaves($param)
-     {
-         $resp = false;
-         if (isset($param['dni']))
-             $resp = true;
-         return $resp;
-     }
+    private function seteadosCamposClaves($param)
+    {
+        $resp = false;
+        if (isset($param['id']))
+            $resp = true;
+        return $resp;
+    }
 
-      /**
+    /**
      * Inserta un objeto
      * @param array $param
      */
     public function alta($param)
     {
         $resp = false;
-        $param['dni'] = null;
-        $obj = $this->cargarObjeto($param);
-        if ($obj != null and $obj->insertar()) {
-            $resp = true;
+        $param['id'] = null;
+
+        //Se verifica que no se repita el dni
+        $usuario = ["dni" => $param['dni']];
+        $existe = $this->buscar($usuario);
+
+        if ($existe == null) {
+            $obj = $this->cargarObjeto($param);
+            if ($obj != null and $obj->insertar()) {
+                $resp = true;
+            }
         }
+
         return $resp;
     }
 
@@ -85,7 +95,7 @@ class C_Persona{
         return $resp;
     }
 
-     /**
+    /**
      * permite modificar un objeto
      * @param array $param
      * @return boolean
@@ -112,6 +122,8 @@ class C_Persona{
         $where = " true ";
         if ($param <> NULL) {
             $where .= '';
+            if (isset($param['id']))
+                $where .= " and id ='" . $param['id'] . "'";
             if (isset($param['dni']))
                 $where .= " and dni ='" . $param['dni'] . "'";
             if (isset($param['razonSocial']))
@@ -120,12 +132,10 @@ class C_Persona{
                 $where .= " and genero ='" . $param['genero'] . "'";
             if (isset($param['edad']))
                 $where .= " and edad ='" . $param['edad'] . "'";
-            
         }
         $obj = new Persona();
         $arreglo =  $obj->listar($where);
 
         return $arreglo;
     }
-
 }

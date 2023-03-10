@@ -1,41 +1,32 @@
 <?php
-
 class Persona
 {
-
+    private $id;
     private $dni;
     private $razonSocial;
     private $genero;
     private $edad;
     private $mensajeOperacion;
 
-    /**Constructor */
     public function __construct()
     {
+        $this->id = "";
         $this->dni = "";
         $this->razonSocial = "";
         $this->genero = "";
         $this->edad = "";
+        $this->mensajeOperacion = "";
     }
 
-    public function setear($dni, $razonSocial, $genero, $edad)
+    // Getters
+    public function getId()
     {
-        $this->dni = $dni;
-        $this->razonSocial = $razonSocial;
-        $this->genero = $genero;
-        $this->edad = $edad;
+        return $this->id;
     }
-
-    /** Gets y Sets */
 
     public function getDni()
     {
         return $this->dni;
-    }
-
-    public function setDni($dni)
-    {
-        $this->dni = $dni;
     }
 
     public function getRazonSocial()
@@ -43,19 +34,9 @@ class Persona
         return $this->razonSocial;
     }
 
-    public function setRazonSocial($razonSocial)
-    {
-        $this->razonSocial = $razonSocial;
-    }
-
     public function getGenero()
     {
         return $this->genero;
-    }
-
-    public function setGenero($genero)
-    {
-        $this->genero = $genero;
     }
 
     public function getEdad()
@@ -63,14 +44,40 @@ class Persona
         return $this->edad;
     }
 
-    public function setEdad($edad)
-    {
-        $this->edad = $edad;
-    }
-
     public function getMensajeOperacion()
     {
         return $this->mensajeOperacion;
+    }
+
+    // Setters
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setDni($dni)
+    {
+        $this->dni = $dni;
+        return $this;
+    }
+
+    public function setRazonSocial($razonSocial)
+    {
+        $this->razonSocial = $razonSocial;
+        return $this;
+    }
+
+    public function setGenero($genero)
+    {
+        $this->genero = $genero;
+        return $this;
+    }
+
+    public function setEdad($edad)
+    {
+        $this->edad = $edad;
+        return $this;
     }
 
     public function setMensajeOperacion($mensajeOperacion)
@@ -78,61 +85,45 @@ class Persona
         $this->mensajeOperacion = $mensajeOperacion;
     }
 
-    /**Funciones BD */
-
-    /**BUSCAR */
-    public function buscar($dni)
+    public function setear($id, $dni, $razonSocial, $genero, $edad)
     {
-        $base = new BaseDatos();
-        $resp = false;
-        $sql = "SELECT * FROM personas WHERE idusuario = '" . $dni . "'";
-        if ($base->Iniciar()) {
-            if ($base->Ejecutar($sql)) {
-                if ($row2 = $base->Registro()) {
-                    $this->setDni($row2['dni']);
-                    $this->setRazonSocial($row2['razonSocial']);
-                    $this->setGenero($row2['genero']);
-                    $this->setEdad($row2['edad']);
-                    $resp = true;
-                }
-            } else {
-                $this->setMensajeOperacion($base->getError());
-            }
-        } else {
-            $this->setMensajeOperacion($base->getError());
-        }
-        return $resp;
+        $this->setId($id);
+        $this->setDni($dni);
+        $this->setRazonSocial($razonSocial);
+        $this->setGenero($genero);
+        $this->setEdad($edad);
     }
 
-    /** CARGAR **/
     public function cargar()
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "SELECT * FROM personas WHERE dni = " . $this->getDni();
+        $sql = "SELECT * FROM personas WHERE id=" . $this->getId();
+
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
             if ($res > -1) {
                 if ($res > 0) {
                     $row = $base->Registro();
-                    $this->setear($row['dni'], $row['razonSocial'], $row['genero'], $row['edad']);
+                    $this->setear($row['id'], $row['dni'], $row['razonSocial'], $row['genero'], $row['edad']);
                 }
             }
         } else {
             $this->setMensajeOperacion($base->getError());
         }
+
         return $resp;
     }
 
-    /** INSERTAR **/
     public function insertar()
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO personas(dni,razonSocial,genero,edad) VALUES('" . $this->getDni() . "','" . $this->getRazonSocial() . "','" . $this->getGenero() . "','" . $this->getEdad() . "');";
+        $sql = "INSERT INTO personas (dni, razonsocial, genero, edad) VALUES ('" . $this->getDni() . "','" . $this->getRazonSocial() . "','" . $this->getGenero() . "','" . $this->getEdad() . "');";
+
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
-                $this->setDni($elid);
+                $this->setId($elid);
                 $resp = true;
             } else {
                 $this->setMensajeOperacion($base->getError());
@@ -140,19 +131,16 @@ class Persona
         } else {
             $this->setMensajeOperacion($base->getError());
         }
+
         return $resp;
     }
 
-
-    /** MODIFICAR **/
     public function modificar()
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "UPDATE personas SET razonSocial='" . $this->getRazonSocial() . "',
-        genero='" . $this->getGenero() . "',
-        edad='" . $this->getEdad() . "',
-        WHERE dni=" . $this->getDni();
+        $sql = "UPDATE personas SET dni= '" . $this->getDni() . "', razonsocial= '" . $this->getRazonSocial() . "', genero= '" . $this->getGenero() . "', edad= '" . $this->getEdad() . "' WHERE id=" . $this->getId();
+
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -162,46 +150,53 @@ class Persona
         } else {
             $this->setMensajeOperacion($base->getError());
         }
+
         return $resp;
     }
 
-    /** ELIMINAR **/
     public function eliminar()
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "DELETE FROM personas WHERE dni=" . $this->getDni();
+        $sql = "DELETE FROM personas WHERE id=" . $this->getId();
+
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
-                return true;
+                $resp = true;
             } else {
                 $this->setMensajeOperacion($base->getError());
             }
         } else {
             $this->setMensajeOperacion($base->getError());
         }
+
         return $resp;
     }
 
-    /** LISTAR **/
-    public static function listar($parametro = "")
+    public static function listar($condicion = "")
     {
         $arreglo = array();
         $base = new BaseDatos();
         $sql = "SELECT * FROM personas ";
-        if ($parametro != "") {
-            $sql .= 'WHERE ' . $parametro;
+
+        if ($condicion != "") {
+            $sql .= 'WHERE ' . $condicion;
         }
+
         $res = $base->Ejecutar($sql);
+
         if ($res > -1) {
             if ($res > 0) {
                 while ($row = $base->Registro()) {
                     $obj = new Persona();
-                    $obj->setear($row['dni'], $row['razonSocial'], $row['genero'], $row['edad']);
+                    $obj->setear($row['id'], $row['dni'], $row['razonSocial'], $row['genero'], $row['edad']);
                     array_push($arreglo, $obj);
                 }
             }
+        } else {
+            $this->setMensajeOperacion($base->getError());
         }
+
         return $arreglo;
     }
 }
