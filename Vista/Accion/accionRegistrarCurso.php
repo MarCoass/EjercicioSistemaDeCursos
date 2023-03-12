@@ -13,6 +13,7 @@ $exito = $objCurso->alta($datos);
 
 if ($exito) {
     header("Location: ../Index.php"); //redirecciona a inicio
+    exit();
 } else {
     echo $exito;
     //header("Location: ../RegistrarCurso.php"); //redirecciona al form
