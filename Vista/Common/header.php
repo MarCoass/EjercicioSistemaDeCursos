@@ -37,7 +37,7 @@
         </li>
         <li class="nav-item">
         <button class="btn btn-dark" >
-            Informacion
+        <a class="dropdown-item" href="Estadisticas.php">Estadisticas</a>
           </button>
         </li>
       </ul>
