@@ -6,7 +6,8 @@ MySQL 8.0.31
 
 ## Como correr el proyecto
 - Descargar y copiar la carpeta en xampp/htdocs o wampp/www segun sea necesario
-- Crear una base de datos llamada 'ejercicio_sistemas_cursos' e importar el archivo ejercicio_sistemas_cursos.sql
+- Crear una base de datos llamada 'ejercicio_sistemas_cursos' e importar el archivo ejercicio_sistemas_cursos.sql. 
+En la base de datos se encuentran cargados cursos, para cargar personas se puede acceder a las opciones 'Registrar Persona' (para carga manual) o 'Cargar desde Endpoint' (para cargar automaticamente 100 personas).
 
 ## Enunciado
 Se debe realizar una peticion a un endpoint el cual le otorgara informacion sobre 100 personas en una BD.
