@@ -2,6 +2,7 @@
 include_once('../configuracion.php');
 $cursos = new C_Curso;
 $arrayCursos = $cursos->buscar([]);
+
 ?>
 <div class="container d-flex flex-column justify-content-center ">
     <div class="row justify-content-center d-flex m-1">
@@ -12,34 +13,42 @@ $arrayCursos = $cursos->buscar([]);
             <button class="btn btn-primary todos">Todos</button>
         </div>
     </div>
-<hr>
-    <div class="container">
+    <hr>
+    <?php if (count($arrayCursos) > 0) {
 
+    ?>
+        <div class="container">
+            <div class="cursos row justify-content-evenly g-4">
+                <?php
+                foreach ($arrayCursos as $curso) {
+                ?>
+                    <div class="card col-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $curso->getNombre() ?></h5>
 
-        <div class="cursos row justify-content-evenly g-4">
-            <?php
-            foreach ($arrayCursos as $curso) {
-            ?>
-                <div class="card col-3" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $curso->getNombre() ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Modalidad: <span><?php echo ucwords(strtolower($curso->getModalidad())) ?></span></h6>
+                            <p class="card-text"><?php echo $curso->getDescripcion() ?></p>
+                            <p class="text-muted">Legajo: <?php echo $curso->getLegajo() ?></p>
+                            <hr>
 
-                        <h6 class="card-subtitle mb-2 text-muted">Modalidad: <span><?php echo ucwords(strtolower($curso->getModalidad())) ?></span></h6>
-                        <p class="card-text"><?php echo $curso->getDescripcion() ?></p>
-                        <p class="text-muted">Legajo: <?php echo $curso->getLegajo() ?></p>
-                        <hr>
-
-                        <form action="listarPersonasInscriptas.php" method="post">
-                            <input type="hidden" name="idCurso" value='<?php echo $curso->getId() ?>'>
-                            <button class="btn btn-secondary" type="submit"> Ver Inscriptos </button>
-                        </form>
+                            <form action="listarPersonasInscriptas.php" method="post">
+                                <input type="hidden" name="idCurso" value='<?php echo $curso->getId() ?>'>
+                                <button class="btn btn-secondary" type="submit"> Ver Inscriptos </button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            <?php
-            }
-            ?>
+                <?php
+                }
+                ?>
+            </div>
         </div>
-    </div>
+    <?php  } else {
+    ?>
+        <div class="alert alert-warning" role="alert">
+            No hay cursos registrados. Puede registrar cursos <a href="RegistrarCurso.php">aqui.</a>
+        </div>
+    <?php
+    } ?>
 </div>
 <script src="Assets/Js/listadoCursos.js"></script>
 <?php include_once('Common/footer.php') ?>
