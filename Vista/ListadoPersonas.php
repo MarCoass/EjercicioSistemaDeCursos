@@ -63,7 +63,7 @@ $arrayCursos = $objCurso->buscar([]);
                 <td> <?php if($cGrupal!=null){
                     echo $cGrupal[0]->getNombre();
                 } else {?> 
-                <form action="Accion/accionAsignarCurso.php" method="post">
+                <form action="asignarCurso.php" method="post">
                     <input type="hidden" name="modalidad" value="GRUPAL">
                     <input type="hidden" name="idPersona" value='<?php echo $persona->getId()?>'>
                     <button type="submit" class="btn btn-primary">Asignar curso</button>
@@ -72,7 +72,7 @@ $arrayCursos = $objCurso->buscar([]);
                 <td> <?php if($cIndividual!=null){
                     echo $cIndividual[0]->getNombre();
                 } else {?> 
-                    <form action="Accion/accionAsignarCurso.php" method="post">
+                    <form action="asignarCurso.php" method="post">
                         <input type="hidden" name="modalidad" value="INDIVIDUAL">
                         <input type="hidden" name="idPersona" value='<?php echo $persona->getId()?>'>
                         <button type="submit" class="btn btn-primary">Asignar curso</button>

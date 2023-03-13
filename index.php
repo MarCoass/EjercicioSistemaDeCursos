@@ -1,4 +1,6 @@
 
-Index
-<?php include 'Vista/Common/footer.php'?>
+<?php 
+header("Location: Vista/Index.php"); //redirecciona a inicio
+exit();
+?>
 

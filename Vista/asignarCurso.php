@@ -1,6 +1,6 @@
 <?php
-include_once "../../configuracion.php";
-include_once('../Common/header.php');
+include_once "../configuracion.php";
+include_once('Common/header.php');
 
 $datos = data_submitted();
 $modalidad = $datos['modalidad'];
@@ -17,7 +17,7 @@ $arrayCursos = $objCursos->buscar(['modalidad' => $modalidad]);
         </div>
     </div>
     <div class="offset-md-4">
-        <form action="accionInscribir.php" method="post" class="col-md-6 mt-3 needs-validation" id="inscribirPersona" name="inscribirPersona" novalidate>
+        <form action="Accion/accionInscribir.php" method="post" class="col-md-6 mt-3 needs-validation" id="inscribirPersona" name="inscribirPersona" novalidate>
             <div class="">
                 <div class="form-floating mt-3">
                     <select class ="form-select" name="idCurso" id="idCurso">
@@ -45,4 +45,4 @@ $arrayCursos = $objCursos->buscar(['modalidad' => $modalidad]);
 </div>
 
 <?php
-include_once('../Common/footer.php'); ?>
+include_once('Common/footer.php'); ?>

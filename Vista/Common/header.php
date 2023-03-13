@@ -1,4 +1,4 @@
-
+<?php ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -18,7 +18,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Cursos de Capacitacion</a>
+  <a class="navbar-brand" href="Index.php">Cursos de Capacitacion</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,6 +29,7 @@
             Operaciones
           </button>
           <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="Accion/cargarDatos.php">Cargar desde Endpoint</a></li>
             <li><a class="dropdown-item" href="RegistrarPersona.php">Registrar persona</a></li>
             <li><a class="dropdown-item" href="RegistrarCurso.php">Registrar curso</a></li>
             <li><a class="dropdown-item" href="ListadoPersonas.php">Listar personas</a></li>

@@ -20,7 +20,9 @@ $exito = $objPersona->alta($datos);
 
 
 if ($exito) {
-    header("Location: ../Index.php"); //redirecciona a inicio
+    header("Location: ../ListadoPersonas.php"); //redirecciona al listado de personas
+    exit();
 } else {
     header("Location: ../RegistrarPersona.php"); //redirecciona al form
+    exit();
 }

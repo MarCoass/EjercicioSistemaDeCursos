@@ -4,7 +4,7 @@ $url = 'https://weblogin.muninqn.gov.ar/api/Examen';
 $data = file_get_contents($url);
 
 $datos = json_decode($data, true)['value'];
-//var_dump($datos[0]);
+//var_dump($datos);
 
 foreach($datos as $persona){
 $nacimiento = $persona['fechaNacimiento'];
@@ -15,7 +15,9 @@ $genero = $persona['genero']['value'];
 $persona['genero'] = $genero;
 
 $objPersona = new C_Persona();
-$exito = $objPersona->alta($persona);
+$objPersona->alta($persona);
+
+header("Location: ../ListadoPersonas.php"); //redirecciona al listado de personas
 }
 
 

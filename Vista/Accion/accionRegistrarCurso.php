@@ -7,14 +7,13 @@ $objCurso = new C_Curso();
 
 $exito = false;
 
-
 $exito = $objCurso->alta($datos);
 
 
 if ($exito) {
-    header("Location: ../Index.php"); //redirecciona a inicio
+    header("Location: ../ListadoCursos.php"); //redirecciona al listado de cursos
     exit();
 } else {
-    echo $exito;
-    //header("Location: ../RegistrarCurso.php"); //redirecciona al form
+    header("Location: ../RegistrarCurso.php"); //redirecciona a inicio
+    exit();
 }

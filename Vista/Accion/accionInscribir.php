@@ -5,8 +5,8 @@ $datos = data_submitted();
 $objRegistro = new C_Registro();
 $exito = $objRegistro->alta($datos);
 
-if($exito){
-    echo 'Registrado';
-} else {
-    echo 'Error';
-}
+
+    header("Location: ../ListadoPersonas.php"); //redirecciona al listado de cursos
+    exit();
+
+?>

@@ -1,5 +1,5 @@
-<?php include_once('../Common/header.php');
-include_once('../../configuracion.php');
+<?php include_once('Common/header.php');
+include_once('../configuracion.php');
 
 $datos = data_submitted();
 
@@ -39,6 +39,7 @@ if (count($arrayPersonas) > 0) {
         <tbody>
             <?php
             foreach ($arrayPersonas as $persona) {
+                
             ?>
                 <tr>
                     <th scope="row"><?php echo $persona[0]->getDni() ?></th>
@@ -64,4 +65,4 @@ if (count($arrayPersonas) > 0) {
 
 
 
-<?php include_once('../Common/footer.php') ?>
+<?php include_once('Common/footer.php') ?>
