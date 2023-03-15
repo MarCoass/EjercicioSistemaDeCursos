@@ -1,7 +1,8 @@
 
 <?php
 
-class C_Registro{
+class C_Registro
+{
 
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
@@ -23,7 +24,7 @@ class C_Registro{
         return $obj;
     }
 
-     /**
+    /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los idPersonas de 
      * las variables instancias del objeto que son claves
      * @param array $param
@@ -45,15 +46,15 @@ class C_Registro{
      * @return boolean
      */
 
-     private function seteadosCamposClaves($param)
-     {
-         $resp = false;
-         if (isset($param['id']))
-             $resp = true;
-         return $resp;
-     }
+    private function seteadosCamposClaves($param)
+    {
+        $resp = false;
+        if (isset($param['id']))
+            $resp = true;
+        return $resp;
+    }
 
-      /**
+    /**
      * Inserta un objeto
      * @param array $param
      */
@@ -85,7 +86,7 @@ class C_Registro{
         return $resp;
     }
 
-     /**
+    /**
      * permite modificar un objeto
      * @param array $param
      * @return boolean
@@ -118,13 +119,10 @@ class C_Registro{
                 $where .= " and idPersona ='" . $param['idPersona'] . "'";
             if (isset($param['idCurso']))
                 $where .= " and idCurso ='" . $param['idCurso'] . "'";
-            
-            
         }
         $obj = new Registro();
         $arreglo =  $obj->listar($where);
 
         return $arreglo;
     }
-
 }

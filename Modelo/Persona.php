@@ -158,7 +158,8 @@ class Persona
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "DELETE FROM personas WHERE id=" . $this->getId();
+        $sql = "DELETE FROM personas WHERE id= " . $this->getId();
+
 
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {

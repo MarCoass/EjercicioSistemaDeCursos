@@ -50,6 +50,13 @@ foreach ($arrayRegistros as $registro) {
                         <td><?php echo $persona[0]->getRazonSocial() ?></td>
                         <td><?php echo $persona[0]->getGenero() ?></td>
                         <td><?php echo $persona[0]->getEdad() ?></td>
+                        <td>
+                            <form action="Accion/desinscribir.php" method="post">
+                                <input type="hidden" name="idPersona" value='<?php echo $persona[0]->getId(); ?>'>
+                                <input type="hidden" name="idCurso" value='<?php echo $datos['idCurso']; ?>'>
+                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                            </form>
+                        </td>
                     </tr>
                 <?php
                 }

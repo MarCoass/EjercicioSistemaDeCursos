@@ -34,9 +34,11 @@ class C_Persona
     private function cargarObjetoConClave($param)
     {
         $obj = null;
+
         if (isset($param['id'])) {
             $obj = new Persona();
-            $obj->cargar($param['id'], null, null, null, null);
+            $obj->setear($param['id'], null, null, null, null);
+            $obj->cargar();
         }
         return $obj;
     }
@@ -132,7 +134,6 @@ class C_Persona
                 $where .= " and genero ='" . $param['genero'] . "'";
             if (isset($param['edad']))
                 $where .= " and edad ='" . $param['edad'] . "'";
-            
         }
         $obj = new Persona();
         $arreglo =  $obj->listar($where);
