@@ -1,5 +1,6 @@
 <?php include_once('Common/header.php');
 include_once('../configuracion.php');
+include_once('../Control/C_Persona.php');
 
 $objPersona = new C_Persona();
 $arrayPersonas = $objPersona->buscar([]);
@@ -53,28 +54,28 @@ $objCurso = new C_Curso();
         </ul>
     </div>
 
-<p class="fs-4">
-    Total cursos registrados: <?php
-                                $arrayCursos = $objCurso->buscar([]);
-                                echo count($arrayCursos);
-                                ?>
-</p>
+    <p class="fs-4">
+        Total cursos registrados: <?php
+                                    $arrayCursos = $objCurso->buscar([]);
+                                    echo count($arrayCursos);
+                                    ?>
+    </p>
 
-<div>
-    <h5>Por modalidad</h5>
+    <div>
+        <h5>Por modalidad</h5>
 
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">Grupales: <?php
-                                                $arrayCursos = $objCurso->buscar(['modalidad' => 'GRUPAL']);
-                                                echo count($arrayCursos);
-                                                ?></li>
-        <li class="list-group-item">Individuales: <?php
-                                                $arrayCursos = $objCurso->buscar(['modalidad' => 'INDIVIDUAL']);
-                                                echo count($arrayCursos);
-                                                ?></li>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Grupales: <?php
+                                                    $arrayCursos = $objCurso->buscar(['modalidad' => 'GRUPAL']);
+                                                    echo count($arrayCursos);
+                                                    ?></li>
+            <li class="list-group-item">Individuales: <?php
+                                                        $arrayCursos = $objCurso->buscar(['modalidad' => 'INDIVIDUAL']);
+                                                        echo count($arrayCursos);
+                                                        ?></li>
 
-    </ul>
-</div>
+        </ul>
+    </div>
 
 </div>
 

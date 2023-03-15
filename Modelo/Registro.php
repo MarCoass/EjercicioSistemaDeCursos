@@ -115,7 +115,9 @@ class Registro
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO registros(id,idPersona,idCurso) VALUES('" . $this->getId() . "','" . $this->getidPersona() . "','" . $this->getIdCurso() ."');";
+
+        $sql = "INSERT INTO registros(idPersona,idCurso) VALUES(" . $this->getidPersona() . "," . $this->getIdCurso() . ");";
+
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
                 $this->setId($elid);

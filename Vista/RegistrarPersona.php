@@ -13,7 +13,7 @@ include_once 'Common/header.php';
         </div>
     </div>
     <div class="offset-md-4">
-        <form action="Accion/accionRegistrarPersona" method="post" class="col-md-6 mt-3 needs-validation" id="registrarPersona" name="registrarPersona" novalidate>
+        <form action="Accion/accionRegistrarPersona.php" method="post" class="col-md-6 mt-3 needs-validation" id="registrarPersona" name="registrarPersona" novalidate>
             <div class="">
                 <div class="form-floating mt-3">
                     <input class="form-control" id="nombre" name="nombre" type="text" placeholder="Nombre" minlength="3" maxlength="50" required>
