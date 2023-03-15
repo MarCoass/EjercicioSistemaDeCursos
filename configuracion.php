@@ -9,8 +9,8 @@
 $PROYECTO = 'EjercicioSistemaDeCursos';
 
 //variable que almacena el directorio del proyecto
-//$ROOT = $_SERVER['DOCUMENT_ROOT'] . "/$PROYECTO/";
-$ROOT = $_SERVER['DOCUMENT_ROOT'];
+$ROOT = $_SERVER['DOCUMENT_ROOT'] . "/$PROYECTO/";
+//$ROOT = $_SERVER['DOCUMENT_ROOT'];
 include_once $ROOT . '/util/funciones.php';
 
 // variable que define la pagina principal del proyecto (menu principal)

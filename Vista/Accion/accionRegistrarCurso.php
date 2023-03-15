@@ -11,9 +11,16 @@ $exito = $objCurso->alta($datos);
 
 
 if ($exito) {
-    header("Location: ../ListadoCursos.php"); //redirecciona al listado de cursos
-    exit();
+    $mensaje = 'Curso cargado con exito. ';
 } else {
-    header("Location: ../RegistrarCurso.php"); //redirecciona a inicio
-    exit();
+    $mensaje = 'Error al cargar el curso. ';
 }
+
+?>
+<script>
+    if (confirm("<?php echo $mensaje ?> ¿Desea cargar otro curso?") == true) {
+        window.location.href = "../RegistrarCurso.php";
+    } else {
+        window.location.href = "../ListadoCursos.php";
+    }
+</script>
